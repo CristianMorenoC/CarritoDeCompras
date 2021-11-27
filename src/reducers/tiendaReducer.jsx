@@ -70,12 +70,12 @@ const reducer = (estado = estadoInicial, accion) => {
             const {idRestar, nombreResta} = accion;
             let copiarCarritoRestar = [...estado.carrito];
             copiarCarritoRestar.forEach((productoCarrito, index) => {
-                if(productoCarrito.cantidad >= 1){
+                if(productoCarrito.cantidad === 1){
+                    copiarCarritoRestar = copiarCarritoRestar.filter(productoCarrito => productoCarrito.id !== idRestar)
+                }else{
                     if(productoCarrito.id === idRestar){
                         copiarCarritoRestar[index] = {id: idRestar, nombre:nombreResta, cantidad: copiarCarritoRestar[index].cantidad - 1}
                     }
-                }else{
-                    copiarCarritoRestar = copiarCarritoRestar.filter(productoCarrito => productoCarrito.id !== idRestar)
                 }
             }
             );
